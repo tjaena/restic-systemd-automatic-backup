@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Make backup my system with restic to Backblaze B2.
+# Make backup my system with restic to SFTP.
 # This script is typically run by: /etc/systemd/system/restic-backup.{service,timer}
 
 # Exit on failure, pipe failure
@@ -37,11 +37,8 @@ BACKUP_TAG=systemd.timer
 
 
 # Set all environment variables like
-# B2_ACCOUNT_ID, B2_ACCOUNT_KEY, RESTIC_REPOSITORY etc.
-source /etc/restic/b2_env.sh
-
-# How many network connections to set up to B2. Default is 5.
-B2_CONNECTIONS=50
+# RESTIC_REPOSITORY etc.
+source /etc/restic/sftp_env.sh
 
 # NOTE start all commands in background and wait for them to finish.
 # Reason: bash ignores any signals while child process is executing and thus my trap exit hook is not triggered.
@@ -60,7 +57,6 @@ restic backup \
 	--verbose \
 	--one-file-system \
 	--tag $BACKUP_TAG \
-	--option b2.connections=$B2_CONNECTIONS \
 	$BACKUP_EXCLUDES \
 	$BACKUP_PATHS &
 wait $!
@@ -71,7 +67,6 @@ wait $!
 restic forget \
 	--verbose \
 	--tag $BACKUP_TAG \
-	--option b2.connections=$B2_CONNECTIONS \
         --prune \
 	--group-by "paths,tags" \
 	--keep-daily $RETENTION_DAYS \
