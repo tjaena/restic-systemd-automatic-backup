@@ -38,7 +38,7 @@ etc/restic/b2_pw.txt:
 
 # target: install-conf - Install restic configuration files.
 # will create these files locally only if they don't already exist
-install-conf: | etc/restic/b2_env.sh etc/restic/sftp_pw.txt
+install-conf: | etc/restic/sftp_env.sh etc/restic/sftp_pw.txt
 	install -d $(DEST_CONF)
 	install -m 0600 $(SRCS_CONF) $(DEST_CONF)
 
