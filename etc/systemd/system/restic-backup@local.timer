@@ -2,7 +2,7 @@
 Description=Backup with restic on schedule
 
 [Timer]
-OnCalendar=daily
+OnCalendar=hourly
 Persistent=true
 RandomizedDelaySec=6h
 
