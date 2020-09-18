@@ -50,7 +50,7 @@ Copy this file to `/etc/restic/backup_exclude` or `~/.backup_exclude`:
 Now see if the backup itself works, by running
 
 ```bash
-$ /usr/local/sbin/restic_backup_local.sh
+$ /usr/local/sbin/restic_backup.sh
 $ restic snapshots
 ````
 
