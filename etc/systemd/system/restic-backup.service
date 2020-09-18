@@ -1,7 +1,6 @@
 [Unit]
 Description=Backup with restic to SFTP
 OnFailure=status-email-user@%n.service
-Requires=nm-unmetered-connection.service
 
 [Service]
 Type=simple
