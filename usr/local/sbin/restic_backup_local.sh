@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Make backup my system with restic to SFTP.
-# This script is typically run by: /etc/systemd/system/restic-backup.{service,timer}
+# This script is typically run by: /etc/systemd/system/restic-backup@local.{service,timer}
 
 # Exit on failure, pipe failure
 set -e -o pipefail
@@ -38,7 +38,7 @@ BACKUP_TAG=systemd.timer
 
 # Set all environment variables like
 # RESTIC_REPOSITORY etc.
-source /etc/restic/sftp_env.sh
+source /etc/restic/sftp_local_env.sh
 
 # NOTE start all commands in background and wait for them to finish.
 # Reason: bash ignores any signals while child process is executing and thus my trap exit hook is not triggered.

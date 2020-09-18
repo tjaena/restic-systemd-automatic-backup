@@ -30,8 +30,11 @@ install-scripts:
 	install -d $(DEST_SCRIPTS)
 	install -m 0744 $(SRCS_SCRIPTS) $(DEST_SCRIPTS)
 
-etc/restic/sftp_env.sh:
-	install -m 0600 etc/restic/sftp_env.sh.template etc/restic/sftp_env.sh
+etc/restic/sftp_local_env.sh:
+	install -m 0600 etc/restic/sftp_local_env.sh.template etc/restic/sftp_local_env.sh
+
+etc/restic/sftp_offsite_env.sh:
+	install -m 0600 etc/restic/sftp_offsite_env.sh.template etc/restic/sftp_offsite_env.sh
 
 etc/restic/sftp_pw.txt:
 	install -m 0600 etc/restic/sftp_pw.txt.template etc/restic/sftp_pw.txt

@@ -1,9 +1,0 @@
-[Unit]
-Description=Check restic backup SFTP for errors
-OnFailure=status-email-user@%n.service
-Conflicts=restic-backup.service
-
-[Service]
-Type=simple
-Nice=10
-ExecStart=/usr/local/sbin/restic_check.sh

@@ -24,9 +24,9 @@ $ sudo make install
 
 ### 1. Configure your SFTP credentials locally
 Put these files in `/etc/restic/`:
-* `sftp_env.sh`: Fill this file out with your SFTP server settings etc. The reason for putting these in a separate file is that it can be used also for you to simply source, when you want to issue some restic commands. For example:
+* `sftp_local_env.sh`: Fill this file out with your SFTP server settings etc. The reason for putting these in a separate file is that it can be used also for you to simply source, when you want to issue some restic commands. For example:
 ```bash
-$ source /etc/restic/sftp_env.sh
+$ source /etc/restic/sftp_local_env.sh
 $ restic snapshots    # You don't have to supply all parameters like --repo, as they are now in your environment!
 ````
 * `sftp_pw.txt`: This file should contain the restic repository password. This is a new password what soon will be used when initializing the new repository. It should be unique to this restic backup repository and is needed for restoring from it.
@@ -34,7 +34,7 @@ $ restic snapshots    # You don't have to supply all parameters like --repo, as 
 ### 2. Initialize remote repo
 Now we must initialize the repository on the remote end:
 ```bash
-source /etc/restic/sftp_env.sh
+source /etc/restic/sftp_local_env.sh
 restic init
 ```
 
@@ -50,23 +50,23 @@ Copy this file to `/etc/restic/backup_exclude` or `~/.backup_exclude`:
 Now see if the backup itself works, by running
 
 ```bash
-$ /usr/local/sbin/restic_backup.sh
+$ /usr/local/sbin/restic_backup_local.sh
 $ restic snapshots
 ````
 
-### 5. Backup automatically; systemd service + timer
+### 5. Backup automatically; systemd service + timer for local and offsite
 Now we can do the modern version of a cron-job, a systemd service + timer, to run the backup every day!
 
 
 Put these files in `/etc/systemd/system/`:
-* `restic-backup.service`: A service that calls the backup script.
-* `restic-backup.timer`: A timer that starts the backup every day.
+* `restic-backup@local.service`: A service that calls the backup script.
+* `restic-backup@local.timer`: A timer that starts the backup every day.
 
 
 Now simply enable the timer with:
 ```bash
-$ systemctl start restic-backup.timer
-$ systemctl enable restic-backup.timer
+$ systemctl start restic-backup@local.timer
+$ systemctl enable restic-backup@local.timer
 ````
 
 You can see when your next backup is scheduled to run with
@@ -77,19 +77,19 @@ $ systemctl list-timers | grep restic
 and see the status of a currently running backup with
 
 ```bash
-$ systemctl status restic-backup
+$ systemctl status restic-backup@local
 ```
 
 or start a backup manually
 
 ```bash
-$ systemctl start restic-backup
+$ systemctl start restic-backup@local
 ```
 
 You can follow the backup stdout output live as backup is running with:
 
 ```bash
-$ journalctl -f -u restic-backup.service
+$ journalctl -f -u restic-backup@local.service
 ````
 
 (skip `-f` to see all backups that has run)
@@ -105,7 +105,7 @@ Put this file in `/usr/local/sbin`:
 Put this files in `/etc/systemd/system/`:
 * `status-email-user@.service`: A service that can notify you via email when a systemd service fails. Edit the target email address in this file.
 
-As you maybe noticed already before, `restic-backup.service` is configured to start `status-email-user.service` on failure.
+As you maybe noticed already before, `restic-backup@local.service` is configured to start `status-email-user.service` on failure.
 
 
 ### 7. Optional: automated backup checks

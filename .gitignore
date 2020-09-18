@@ -1,2 +1,3 @@
-sftp_env.sh
+sftp_local_env.sh
+sftp_offsite_env.sh
 sftp_pw.txt
