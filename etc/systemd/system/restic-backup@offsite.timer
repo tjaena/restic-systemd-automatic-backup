@@ -4,6 +4,7 @@ Description=Backup with restic on schedule
 [Timer]
 OnCalendar=daily
 Persistent=true
+RandomizedDelaySec=6h
 
 [Install]
 WantedBy=timers.target

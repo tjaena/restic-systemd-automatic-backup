@@ -4,6 +4,7 @@ Description=Check restic backup SFTP for errors on a schedule
 [Timer]
 OnCalendar=monthly
 Persistent=true
+RandomizedDelaySec=6h
 
 [Install]
 WantedBy=timers.target
