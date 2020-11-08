@@ -3,8 +3,10 @@ Description=Backup with restic to offsite SFTP
 OnFailure=status-email-user@%n.service
 
 [Service]
+Environment="HC_ID=<paste your HC Ping ID here!>"
 Type=simple
 Nice=10
 ExecStart=/usr/local/sbin/restic_backup_offsite.sh
+ExecStopPost=/usr/bin/curl -fsS -m 10 --retry 5 "https://hc-ping.com/${HC_ID}/${EXIT_STATUS}"
 # $HOME or $XDG_CACHE_HOME must be set for restic to find /root/.cache/restic/
 Environment="HOME=/root"

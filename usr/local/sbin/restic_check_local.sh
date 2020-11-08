@@ -17,6 +17,7 @@ trap exit_hook INT TERM
 
 
 source /etc/restic/sftp_local_env.sh
+curl -fsS -m 10 --retry 5 "https://hc-ping.com/${HC_ID}/start"
 
 # Remove locks from other stale processes to keep the automated backup running.
 # NOTE nope, don't unlock like restic_backup.sh. restic_backup.sh should take precedence over this script.

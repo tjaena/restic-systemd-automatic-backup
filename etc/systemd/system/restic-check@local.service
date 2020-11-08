@@ -4,6 +4,8 @@ OnFailure=status-email-user@%n.service
 Conflicts=restic-backup@local.service
 
 [Service]
+Environment="HC_ID=<paste your HC Ping ID here!>"
 Type=simple
 Nice=10
 ExecStart=/usr/local/sbin/restic_check_local.sh
+ExecStopPost=/usr/bin/curl -fsS -m 10 --retry 5 "https://hc-ping.com/${HC_ID}/${EXIT_STATUS}"
