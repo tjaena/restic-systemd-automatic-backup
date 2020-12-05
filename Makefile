@@ -33,15 +33,18 @@ install-scripts:
 etc/restic/sftp_local_env.sh:
 	install -m 0600 etc/restic/sftp_local_env.sh.template etc/restic/sftp_local_env.sh
 
-etc/restic/sftp_offsite_env.sh:
-	install -m 0600 etc/restic/sftp_offsite_env.sh.template etc/restic/sftp_offsite_env.sh
+etc/restic/b2_offsite_env.sh:
+	install -m 0600 etc/restic/b2_offsite_env.sh.template etc/restic/b2_offsite_env.sh
 
 etc/restic/sftp_pw.txt:
 	install -m 0600 etc/restic/sftp_pw.txt.template etc/restic/sftp_pw.txt
 
+etc/restic/b2_pw.txt:
+	install -m 0600 etc/restic/b2_pw.txt.template etc/restic/b2_pw.txt
+
 # target: install-conf - Install restic configuration files.
 # will create these files locally only if they don't already exist
-install-conf: | etc/restic/sftp_local_env.sh etc/restic/sftp_offsite_env.sh etc/restic/sftp_pw.txt
+install-conf: | etc/restic/sftp_local_env.sh etc/restic/b2_offsite_env.sh etc/restic/sftp_pw.txt etc/restic/b2_pw.txt
 	install -d $(DEST_CONF)
 	install -m 0600 $(SRCS_CONF) $(DEST_CONF)
 

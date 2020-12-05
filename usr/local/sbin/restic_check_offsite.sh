@@ -16,7 +16,7 @@ exit_hook() {
 trap exit_hook INT TERM
 
 
-source /etc/restic/sftp_offsite_env.sh
+source /etc/restic/b2_offsite_env.sh
 curl -fsS -m 10 --retry 5 "https://hc-ping.com/${HC_ID}/start"
 
 # Remove locks from other stale processes to keep the automated backup running.

@@ -1,4 +1,4 @@
-# SFTP credentials.
+# SFTP Repo Info
 # Extracted settings so both systemd timers and user can just source this when want to work on my B2 backup.
 # See https://restic.readthedocs.io/en/latest/030_preparing_a_new_repo.html
 

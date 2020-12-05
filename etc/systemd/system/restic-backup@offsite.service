@@ -1,5 +1,5 @@
 [Unit]
-Description=Backup with restic to offsite SFTP
+Description=Backup with restic to offsite B2
 OnFailure=status-email-user@%n.service
 
 [Service]

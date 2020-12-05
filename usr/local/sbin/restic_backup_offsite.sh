@@ -38,7 +38,7 @@ BACKUP_TAG=offsite
 
 # Set all environment variables like
 # RESTIC_REPOSITORY etc.
-source /etc/restic/sftp_offsite_env.sh
+source /etc/restic/b2_offsite_env.sh
 curl -fsS -m 10 --retry 5 "https://hc-ping.com/${HC_ID}/start"
 
 # NOTE start all commands in background and wait for them to finish.
