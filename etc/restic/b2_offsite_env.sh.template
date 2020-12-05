@@ -4,3 +4,5 @@
 
 export RESTIC_REPOSITORY="b2:<bucket-name>/path/to/repo"
 export RESTIC_PASSWORD_FILE="/etc/restic/b2_pw.txt"
+export B2_ACCOUNT_ID=<MY_APPLICATION_KEY_ID>
+export B2_ACCOUNT_KEY=<MY_APPLICATION_KEY>
