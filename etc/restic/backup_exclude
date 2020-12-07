@@ -1,6 +1,7 @@
 /.snapshots/
 /opt
 /root/.cache/
+/tmp/
 /usr/share/**/*.html
 /usr/share/help/
 /usr/share/licenses/
