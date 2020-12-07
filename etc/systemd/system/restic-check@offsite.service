@@ -4,7 +4,7 @@ OnFailure=status-email-user@%n.service
 Conflicts=restic-backup@offsite.service
 
 [Service]
-Environment="HC_ID=<id>"
+Environment="HC_ID=<paste your HC Ping ID here!>"
 Type=simple
 Nice=10
 ExecStart=/usr/local/sbin/restic_check_offsite.sh

@@ -2,9 +2,9 @@
 Description=Backup with restic on schedule
 
 [Timer]
-OnCalendar=hourly
+OnCalendar=*-*-* 4:00:00
 Persistent=true
-RandomizedDelaySec=15m
+RandomizedDelaySec=30min
 
 [Install]
 WantedBy=timers.target
