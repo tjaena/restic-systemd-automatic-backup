@@ -5,6 +5,12 @@
 # Exit on failure, pipe failure
 set -e -o pipefail
 
+# How many backups to keep.
+RETENTION_DAYS=7
+RETENTION_WEEKS=4
+RETENTION_MONTHS=3
+RETENTION_YEARS=1
+
 # Clean up lock if we are killed.
 # If killed by systemd, like $(systemctl stop restic), then it kills the whole cgroup and all it's subprocesses.
 # However if we kill this script ourselves, we need this trap that kills all subprocesses manually.
