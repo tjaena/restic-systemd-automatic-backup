@@ -24,6 +24,20 @@ curl -fsS -m 10 --retry 5 "https://hc-ping.com/${HC_ID}/start"
 #restic unlock &
 #wait $!
 
+# Dereference and delete/prune old backups.
+# See restic-forget(1) or http://restic.readthedocs.io/en/latest/060_forget.html
+# --group-by only the tag and path, and not by hostname. This is because I create a B2 Bucket per host, and if this hostname accidentially change some time, there would now be multiple backup sets.
+restic forget \
+	--verbose \
+	--tag $BACKUP_TAG \
+        --prune \
+	--group-by "paths,tags" \
+	--keep-daily $RETENTION_DAYS \
+	--keep-weekly $RETENTION_WEEKS \
+	--keep-monthly $RETENTION_MONTHS \
+	--keep-yearly $RETENTION_YEARS &
+wait $!
+
 # Check repository for errors.
 restic check \
 	--verbose &

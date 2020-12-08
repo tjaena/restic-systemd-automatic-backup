@@ -2,7 +2,7 @@
 Description=Check restic backup B2 for errors on a schedule
 
 [Timer]
-OnCalendar=weekly
+OnCalendar=quarterly
 Persistent=true
 RandomizedDelaySec=1h
 

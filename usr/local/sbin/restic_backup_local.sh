@@ -62,20 +62,6 @@ restic backup \
 	$BACKUP_PATHS &
 wait $!
 
-# Dereference and delete/prune old backups.
-# See restic-forget(1) or http://restic.readthedocs.io/en/latest/060_forget.html
-# --group-by only the tag and path, and not by hostname. This is because I create a B2 Bucket per host, and if this hostname accidentially change some time, there would now be multiple backup sets.
-restic forget \
-	--verbose \
-	--tag $BACKUP_TAG \
-        --prune \
-	--group-by "paths,tags" \
-	--keep-daily $RETENTION_DAYS \
-	--keep-weekly $RETENTION_WEEKS \
-	--keep-monthly $RETENTION_MONTHS \
-	--keep-yearly $RETENTION_YEARS &
-wait $!
-
 # Check repository for errors.
 # NOTE this takes much time (and data transfer from remote repo?), do this in a separate systemd.timer which is run less often.
 #restic check &

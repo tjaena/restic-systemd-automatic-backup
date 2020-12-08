@@ -2,7 +2,7 @@
 Description=Check restic backup SFTP for errors on a schedule
 
 [Timer]
-OnCalendar=weekly
+OnCalendar=monthly
 Persistent=true
 RandomizedDelaySec=1h
 
