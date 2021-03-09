@@ -15,12 +15,6 @@ exit_hook() {
 }
 trap exit_hook INT TERM
 
-# How many backups to keep.
-RETENTION_DAYS=7
-RETENTION_WEEKS=4
-RETENTION_MONTHS=3
-RETENTION_YEARS=1
-
 # What to backup, and what to not
 BACKUP_PATHS="/ /boot /home"
 [ -d /mnt/media ] && BACKUP_PATHS+=" /mnt/media"
@@ -56,6 +50,7 @@ wait $!
 # --tag lets us reference these backups later when doing restic-forget.
 restic backup \
 	--verbose \
+	--exclude-caches \
 	--one-file-system \
 	--tag $BACKUP_TAG \
 	$BACKUP_EXCLUDES \

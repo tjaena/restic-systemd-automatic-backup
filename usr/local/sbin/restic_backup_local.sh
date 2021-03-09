@@ -50,6 +50,7 @@ wait $!
 # --tag lets us reference these backups later when doing restic-forget.
 restic backup \
 	--verbose \
+	--exclude-caches \
 	--one-file-system \
 	--tag $BACKUP_TAG \
 	$BACKUP_EXCLUDES \
